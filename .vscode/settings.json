@@ -33,6 +33,8 @@
   },
   "java.format.settings.url": ".vscode/java-formatter.xml",
   "java.format.settings.profile": "GoogleStyle",
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.configuration.updateBuildConfiguration": "interactive",
 
   // Terraform settings
   "[terraform]": {
@@ -88,6 +90,5 @@
   // Git settings
   "git.enableSmartCommit": true,
   "git.confirmSync": false,
-  "git.autofetch": true,
-  "java.compile.nullAnalysis.mode": "automatic"
+  "git.autofetch": true
 }
