@@ -7,3 +7,8 @@ export interface Expense {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface EnhancedExpense extends Expense {
+  categoryTypeName: string;
+  categoryName: string;
+}

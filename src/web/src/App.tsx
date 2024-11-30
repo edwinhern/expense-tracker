@@ -1,8 +1,8 @@
+import { ExpensePage } from '@/components';
 import './App.css';
-import { ExpenseList } from './components/ExpenseList';
 
 function App() {
-  return <ExpenseList />;
+  return <ExpensePage />;
 }
 
 export default App;
