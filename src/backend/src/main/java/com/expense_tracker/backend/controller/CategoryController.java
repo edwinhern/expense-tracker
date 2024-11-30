@@ -2,7 +2,6 @@ package com.expense_tracker.backend.controller;
 
 import java.util.Collection;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,12 +15,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/api/v1/categories/")
+@RequestMapping("/api/v1/categories")
 @Tag(name = "Category", description = "Category API")
 public class CategoryController {
   private final CategoryService categoryService;
 
-  @Autowired
   public CategoryController(final CategoryService categoryService) {
     this.categoryService = categoryService;
   }
