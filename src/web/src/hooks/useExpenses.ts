@@ -17,7 +17,12 @@ export function useExpenses(params?: {
     queryKey: ['expenses', params],
     queryFn: async () => {
       const { data } = await api.get<ExpenseResponse>('/api/v1/expenses', { params });
-      return data;
+
+      if (!data.success) {
+        throw new Error(data.message);
+      }
+
+      return data.data;
     },
   });
 }
