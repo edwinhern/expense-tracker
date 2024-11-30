@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.expense_tracker.backend.models.ServiceResponse;
 import com.expense_tracker.backend.models.entities.Category;
-import com.expense_tracker.backend.service.impl.CategoryServiceImpl;
+import com.expense_tracker.backend.service.CategoryService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,10 +19,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping("/api/v1/categories/")
 @Tag(name = "Category", description = "Category API")
 public class CategoryController {
-  private final CategoryServiceImpl categoryService;
+  private final CategoryService categoryService;
 
   @Autowired
-  public CategoryController(final CategoryServiceImpl categoryService) {
+  public CategoryController(final CategoryService categoryService) {
     this.categoryService = categoryService;
   }
 

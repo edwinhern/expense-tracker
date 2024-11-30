@@ -1,4 +1,4 @@
-package com.expense_tracker.backend.service.impl;
+package com.expense_tracker.backend.service;
 
 import java.util.Collection;
 
@@ -9,14 +9,13 @@ import org.springframework.stereotype.Service;
 import com.expense_tracker.backend.models.ServiceResponse;
 import com.expense_tracker.backend.models.entities.Category;
 import com.expense_tracker.backend.repository.CategoryRepository;
-import com.expense_tracker.backend.service.interfaces.CategoryService;
 
 @Service
-public class CategoryServiceImpl implements CategoryService {
+public class CategoryService implements ICategoryService {
   private final CategoryRepository categoryRepository;
 
   @Autowired
-  public CategoryServiceImpl(final CategoryRepository categoryRepository) {
+  public CategoryService(final CategoryRepository categoryRepository) {
     this.categoryRepository = categoryRepository;
   }
 
