@@ -38,6 +38,15 @@ services:
       - SPRING_DATASOURCE_PASSWORD=postgres
     depends_on:
       - flyway
+  web:
+    build:
+      context: ./src/web
+      dockerfile: Dockerfile
+    container_name: expense-web
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
 
 volumes:
   postgres_data:
