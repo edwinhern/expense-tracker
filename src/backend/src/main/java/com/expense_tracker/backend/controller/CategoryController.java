@@ -12,13 +12,23 @@ import com.expense_tracker.backend.models.ServiceResponse;
 import com.expense_tracker.backend.models.entities.Category;
 import com.expense_tracker.backend.service.impl.CategoryServiceImpl;
 
-@RestController @RequestMapping("/api/v1/categories/")
-public class CategoryController {
-    @Autowired
-    private CategoryServiceImpl categoryService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
-    @GetMapping()
-    public ResponseEntity<ServiceResponse<Collection<Category>>> findAllCategories() {
-        return ResponseEntity.ok(categoryService.findAllCategories());
-    }
+@RestController
+@RequestMapping("/api/v1/categories/")
+@Tag(name = "Category", description = "Category API")
+public class CategoryController {
+  private final CategoryServiceImpl categoryService;
+
+  @Autowired
+  public CategoryController(final CategoryServiceImpl categoryService) {
+    this.categoryService = categoryService;
+  }
+
+  @GetMapping
+  @Operation(summary = "Get all categories")
+  public ResponseEntity<ServiceResponse<Collection<Category>>> findAllCategories() {
+    return ResponseEntity.ok(categoryService.findAllCategories());
+  }
 }

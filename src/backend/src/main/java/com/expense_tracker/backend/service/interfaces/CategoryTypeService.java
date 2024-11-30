@@ -5,5 +5,5 @@ import java.util.Collection;
 import com.expense_tracker.backend.models.entities.CategoryType;
 
 public interface CategoryTypeService {
-    Collection<CategoryType> findAllCategoryTypes();
+  Collection<CategoryType> findAllCategoryTypes();
 }

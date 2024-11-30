@@ -15,24 +15,30 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity @Table(name = "category_types") @Data @NoArgsConstructor @AllArgsConstructor @Builder
+@Entity
+@Table(name = "category_types")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class CategoryType {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(name = "category_id")
-    private Long categoryId;
+  @Column(name = "category_id")
+  private Long categoryId;
 
-    @NotNull
-    private String name;
+  @NotNull
+  private String name;
 
-    private String description;
+  private String description;
 
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
+  @Column(name = "created_at")
+  private LocalDateTime createdAt;
 
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
+  @PrePersist
+  protected void onCreate() {
+    this.createdAt = LocalDateTime.now();
+  }
 }

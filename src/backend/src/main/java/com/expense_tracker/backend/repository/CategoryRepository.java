@@ -10,6 +10,6 @@ import com.expense_tracker.backend.models.entities.Category;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-    @Query("SELECT c FROM Category c")
-    Collection<Category> findAllCategories();
+  @Query("SELECT c FROM Category c")
+  Collection<Category> findAllCategories();
 }

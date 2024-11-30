@@ -18,39 +18,47 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity @Table(name = "investments") @Data @NoArgsConstructor @AllArgsConstructor @Builder
+@Entity
+@Table(name = "investments")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Investment {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @NotNull
-    private String type;
+  @NotNull
+  private String type;
 
-    @NotNull @Column(precision = 10, scale = 2)
-    private BigDecimal amount;
+  @NotNull
+  @Column(precision = 10, scale = 2)
+  private BigDecimal amount;
 
-    @NotNull @Column(name = "purchase_date")
-    private LocalDate purchaseDate;
+  @NotNull
+  @Column(name = "purchase_date")
+  private LocalDate purchaseDate;
 
-    @Column(name = "current_value", precision = 10, scale = 2)
-    private BigDecimal currentValue;
+  @Column(name = "current_value", precision = 10, scale = 2)
+  private BigDecimal currentValue;
 
-    private String notes;
+  private String notes;
 
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
+  @Column(name = "created_at")
+  private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+  @Column(name = "updated_at")
+  private LocalDateTime updatedAt;
 
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
-    }
+  @PrePersist
+  protected void onCreate() {
+    createdAt = LocalDateTime.now();
+    updatedAt = LocalDateTime.now();
+  }
 
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
+  @PreUpdate
+  protected void onUpdate() {
+    updatedAt = LocalDateTime.now();
+  }
 }

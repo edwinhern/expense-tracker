@@ -6,5 +6,5 @@ import com.expense_tracker.backend.models.ServiceResponse;
 import com.expense_tracker.backend.models.entities.Category;
 
 public interface CategoryService {
-    ServiceResponse<Collection<Category>> findAllCategories();
+  ServiceResponse<Collection<Category>> findAllCategories();
 }

@@ -13,21 +13,25 @@ import com.expense_tracker.backend.service.interfaces.CategoryService;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
-    @Autowired
-    private CategoryRepository categoryRepository;
+  private final CategoryRepository categoryRepository;
 
-    @Override
-    public ServiceResponse<Collection<Category>> findAllCategories() {
-        try {
-            Collection<Category> categories = categoryRepository.findAllCategories();
+  @Autowired
+  public CategoryServiceImpl(final CategoryRepository categoryRepository) {
+    this.categoryRepository = categoryRepository;
+  }
 
-            if (categories.isEmpty()) {
-                return ServiceResponse.failure("No categories found", HttpStatus.NOT_FOUND);
-            }
+  @Override
+  public ServiceResponse<Collection<Category>> findAllCategories() {
+    try {
+      final Collection<Category> categories = categoryRepository.findAllCategories();
 
-            return ServiceResponse.success("Categories found", categories);
-        } catch (Exception e) {
-            return ServiceResponse.failure("Error finding categories: " + e.getMessage());
-        }
+      if (categories.isEmpty()) {
+        return ServiceResponse.failure("No categories found", HttpStatus.NOT_FOUND);
+      }
+
+      return ServiceResponse.success("Categories found", categories);
+    } catch (final Exception e) {
+      return ServiceResponse.failure("Error finding categories: " + e.getMessage());
     }
+  }
 }
