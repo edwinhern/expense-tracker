@@ -19,8 +19,11 @@ public class ServiceResponse<T> {
     return success(message, data, HttpStatus.OK);
   }
 
-  public static <T> ServiceResponse<T> success(
-      final String message, final T data, final HttpStatusCode statusCode) {
+  public static <T> ServiceResponse<T> success(final String message, final HttpStatusCode statusCode) {
+    return success(message, null, statusCode);
+  }
+
+  public static <T> ServiceResponse<T> success(final String message, final T data, final HttpStatusCode statusCode) {
     return ServiceResponse.<T>builder()
         .success(true)
         .message(message)
@@ -34,13 +37,11 @@ public class ServiceResponse<T> {
     return failure(message, null, HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
-  public static <T> ServiceResponse<T> failure(
-      final String message, final HttpStatusCode statusCode) {
+  public static <T> ServiceResponse<T> failure(final String message, final HttpStatusCode statusCode) {
     return failure(message, null, statusCode);
   }
 
-  public static <T> ServiceResponse<T> failure(
-      final String message, final T data, final HttpStatusCode statusCode) {
+  public static <T> ServiceResponse<T> failure(final String message, final T data, final HttpStatusCode statusCode) {
     return ServiceResponse.<T>builder()
         .success(false)
         .message(message)
