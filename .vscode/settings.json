@@ -75,7 +75,6 @@
     "*.yaml": "yaml",
     "*.tf": "terraform",
     "*.tfvars": "terraform",
-    "docker-compose*.yml": "dockerfile",
     "Dockerfile*": "dockerfile"
   },
 
@@ -90,5 +89,6 @@
   // Git settings
   "git.enableSmartCommit": true,
   "git.confirmSync": false,
-  "git.autofetch": true
+  "git.autofetch": true,
+  "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx2G -Xms100m -Xlog:disable"
 }

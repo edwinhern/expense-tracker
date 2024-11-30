@@ -1,0 +1,43 @@
+services:
+  db:
+    build:
+      context: ./src/database
+      dockerfile: Dockerfile
+    container_name: expense-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  flyway:
+    image: flyway/flyway:latest
+    container_name: expense-flyway
+    command: -configFiles=/flyway/conf/flyway.conf clean migrate
+    volumes:
+      - ./src/database/migrations:/flyway/sql
+      - ./src/database/flyway.conf:/flyway/conf/flyway.conf
+    depends_on:
+      db:
+        condition: service_healthy
+
+  backend:
+    build:
+      context: ./src/backend
+      dockerfile: Dockerfile
+    container_name: expense-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/expense_tracker
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    depends_on:
+      - flyway
+
+volumes:
+  postgres_data:
