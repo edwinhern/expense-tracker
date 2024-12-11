@@ -1,5 +1,5 @@
 variable "vpc_id" {
-  description = "VPC ID"
+  description = "ID of the VPC"
   type        = string
 }
 
@@ -13,12 +13,12 @@ variable "environment" {
   type        = string
 }
 
-variable "project_name" {
-  description = "Name of the project"
-  type        = string
-}
-
 variable "cluster_name" {
   description = "Name of the EKS cluster"
   type        = string
+}
+
+variable "tags" {
+  description = "Tags"
+  type        = map(string)
 }

@@ -34,11 +34,7 @@ module "eks" {
     }
   }
 
-  tags = {
-    Environment = var.environment
-    Project     = var.project_name
-    ManagedBy   = "terraform"
-  }
+  tags = var.tags
 }
 
 # IAM OIDC provider for the cluster

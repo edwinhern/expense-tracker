@@ -2,19 +2,15 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "5.16.0"
 
-  name = var.vpc_name
+  name = "${var.vpc_name}-${var.environment}-vpc"
   cidr = var.vpc_cidr
 
-  azs             = ["${var.aws_region}a", "${var.aws_region}b"]
-  private_subnets = var.private_subnet_cidrs
-  public_subnets  = var.public_subnet_cidrs
+  azs              = var.azs
+  public_subnets   = [for k, v in var.azs : cidrsubnet(var.vpc_cidr, 8, k)]
+  private_subnets  = [for k, v in var.azs : cidrsubnet(var.vpc_cidr, 8, k + 3)]
+  database_subnets = [for k, v in var.azs : cidrsubnet(var.vpc_cidr, 8, k + 6)]
 
-  enable_nat_gateway     = true
-  single_nat_gateway     = var.environment == "dev" ? true : false
-  one_nat_gateway_per_az = var.environment == "dev" ? true : false
-
-  enable_dns_hostnames = true
-  enable_dns_support   = true
+  create_database_subnet_group = true
 
   # Tags required for EKS
   private_subnet_tags = {
@@ -27,9 +23,5 @@ module "vpc" {
     "kubernetes.io/role/elb"                    = "1"
   }
 
-  tags = {
-    Environment = var.environment
-    Project     = var.project_name
-    ManagedBy   = "terraform"
-  }
+  tags = var.tags
 }

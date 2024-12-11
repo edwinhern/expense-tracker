@@ -1,0 +1,36 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+env:
+  AWS_REGION: us-east-1
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  ECR_BACKEND_REPOSITORY: expense-tracker-backend
+  ECR_FRONTEND_REPOSITORY: expense-tracker-frontend
+  EKS_CLUSTER_NAME: expense-tracker-cluster
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: maven
+
+      - name: Run Backend Tests
+        run: |
+          cd backend
+          ./mvnw test
+      - name: Run Frontend Tests
+        run: |
+          cd frontend
+          npm test
