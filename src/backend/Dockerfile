@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21-jdk-alpine
+FROM maven:openjdk
 
 WORKDIR /app
 
@@ -10,4 +10,5 @@ COPY src ./src
 RUN ./mvnw package -DskipTests
 
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","target/backend-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java"]
+CMD ["-jar","target/backend-0.0.1-SNAPSHOT.jar", "config.yml"]
